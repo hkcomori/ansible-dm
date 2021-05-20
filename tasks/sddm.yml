@@ -1,0 +1,38 @@
+---
+# vim: foldmarker=[[[,]]]:foldmethod=marker
+
+- name: Ensure sddm symbolic link
+  file:
+    src: /usr/bin/sddm
+    dest: /usr/sbin/sddm
+    state: link
+    owner: 'root'
+    group: 'root'
+
+- name: Divert SDDM configuration
+  command: dpkg-divert --quiet --local --divert "{{ item }}.dpkg-divert"
+           --rename "{{ item }}"
+  args:
+    creates: '{{ item }}.dpkg-divert'
+  when: not (dm__testing_mode|d(False) | bool)
+  with_items:
+    - '/lib/systemd/system/sddm.service'
+
+- name: Support /usr/sbin/sddm
+  template:
+    src: 'etc/sddm/sddm.service.j2'
+    dest: '/lib/systemd/system/sddm.service'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+  notify: [ 'Reload systemd configs', 'Restart display-manager' ]
+
+- name: Configure SDDM
+  template:
+    src: 'etc/sddm/sddm.conf.j2'
+    dest: '/etc/sddm.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: [ 'Restart display-manager' ]
+  when: dm__automatic_login_enabled

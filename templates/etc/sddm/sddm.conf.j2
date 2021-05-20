@@ -1,0 +1,12 @@
+# {{ ansible_managed }}
+[General]
+Numlock=on
+
+{% if dm__automatic_login_enabled | bool %}
+[Autologin]
+User={{ dm__automatic_login_user_name | string }}
+{% if dm_user_session != omit %}
+Session={{ dm_user_session | string}}
+{% endif %}
+{% endif %}
+

@@ -21,6 +21,7 @@
 #
 # * ``gdm``
 # * ``lightdm``
+# * ``sddm``
 #
 # Note that the different display managers support a different set of features
 # so not all configuration options that this role provides will have an effect
@@ -37,6 +38,7 @@ dm__name: 'lightdm'
 dm__package_map:
   lightdm: 'lightdm'
   gdm: 'gdm3'
+  sddm: 'sddm'
 
                                                                    # ]]]
 # .. envvar:: dm__packages [[[
@@ -56,6 +58,12 @@ dm__lightdm_packages: []
 # Additional list of packages to install when GDM_ is selected.
 dm__gdm_packages:
   - 'libpam-gnome-keyring'
+
+                                                                   # ]]]
+# .. envvar:: dm__sddm_packages [[[
+#
+# Additional list of packages to install when SDDM_ is selected.
+dm__sddm_packages: []
                                                                    # ]]]
                                                                    # ]]]
 # Login settings [[[

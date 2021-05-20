@@ -16,6 +16,7 @@ Supported options are:
 
 * [GNOME Display Manager](https://en.wikipedia.org/wiki/GNOME_Display_Manager)
 * [LightDM](https://en.wikipedia.org/wiki/LightDM)
+* [Simple Desktop Display Manager](https://en.wikipedia.org/wiki/Simple_Desktop_Display_Manager)
 
 ### Installation
 

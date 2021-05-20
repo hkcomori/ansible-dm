@@ -30,6 +30,7 @@ galaxy_info:
     - linuxondesktop
     - gdm
     - lightdm
+    - sddm
     - dm
     - displaymanager
     - X11

@@ -16,6 +16,7 @@
     - '{{ dm__package_map[dm__name] }}'
     - '{{ dm__lightdm_packages if (dm__name == "lightdm") else [] }}'
     - '{{ dm__gdm_packages if (dm__name == "gdm") else [] }}'
+    - '{{ dm__sddm_packages if (dm__name == "sddm") else [] }}'
   tags: [ 'role::dm:pkg' ]
 
 - import_tasks: 'gdm.yml'
@@ -23,6 +24,9 @@
 
 - import_tasks: 'lightdm.yml'
   when: (dm__name == "lightdm")
+
+- import_tasks: 'sddm.yml'
+  when: (dm__name == "sddm")
 
 - name: Ensure alternative display managers are absent
   package:
